@@ -1,5 +1,7 @@
 "use strict";
 
+const Antl = use("Antl");
+
 class UserStore {
   get validateAll() {
     return true;
@@ -9,8 +11,12 @@ class UserStore {
     return {
       username: "required",
       email: "required|email|unique:users",
-      password: "required|confirmed",
+      password: "required",
     };
+  }
+
+  get messages() {
+    return Antl.list("validation");
   }
 }
 

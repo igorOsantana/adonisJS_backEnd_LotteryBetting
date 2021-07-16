@@ -3,12 +3,6 @@
 const User = use("App/Models/User");
 
 class UserController {
-  async index() {
-    const user = await User.all();
-
-    return user;
-  }
-
   async store({ request }) {
     const data = request.only(["username", "email", "password"]);
 
@@ -17,14 +11,14 @@ class UserController {
     return user;
   }
 
-  async show({ params }) {
-    const user = await User.findOrFail(params.id);
+  async show({ auth }) {
+    const user = await User.findOrFail(auth.user.id);
 
     return user;
   }
 
-  async update({ params, request }) {
-    const user = await User.findOrFail(params.id);
+  async update({ auth, request }) {
+    const user = await User.findOrFail(auth.user.id);
     const data = request.only(["username", "email", "password"]);
 
     user.merge(data);
@@ -34,8 +28,8 @@ class UserController {
     return user;
   }
 
-  async destroy({ params }) {
-    const user = await User.findOrFail(params.id);
+  async destroy({ auth }) {
+    const user = await User.findOrFail(auth.user.id);
 
     await user.delete();
   }

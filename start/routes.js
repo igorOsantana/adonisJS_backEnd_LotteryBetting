@@ -2,15 +2,12 @@
 
 const Route = use("Route");
 
-Route.get("/users", "UserController.index");
-Route.get("/users/:id", "UserController.show");
 Route.post("/users", "UserController.store").validator("/User/UserStore");
 
 Route.group(() => {
-  Route.put("/users/:id", "UserController.update").validator(
-    "/User/UserUpdate"
-  );
-  Route.delete("/users/:id", "UserController.destroy");
+  Route.get("/users", "UserController.show");
+  Route.put("/users", "UserController.update").validator("/User/UserUpdate");
+  Route.delete("/users", "UserController.destroy");
 
   Route.get("/bets", "BetController.index");
   Route.post("/bets", "BetController.store");

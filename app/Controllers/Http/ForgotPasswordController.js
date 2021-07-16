@@ -3,7 +3,8 @@
 const moment = require("moment");
 const crypto = require("crypto");
 const User = use("App/Models/User");
-const Mail = use("Mail");
+const Kue = use("Kue");
+const Job = use("App/Jobs/ResetPasswordMail");
 
 class ForgotPasswordController {
   async store({ request, response }) {
@@ -20,16 +21,7 @@ class ForgotPasswordController {
 
       await user.save();
 
-      await Mail.send(
-        ["emails.forgot_password"],
-        { email, username, link },
-        (message) => {
-          message
-            .to(email)
-            .from("igorsantana@gmail.com", "Igor | Prova AdonisJS")
-            .subject("Recuperação de senha");
-        }
-      );
+      Kue.dispatch(Job.key, { email, username, link }, { attempts: 3 });
     } catch (error) {
       return response.status(error.status).send({
         error: {
@@ -64,7 +56,6 @@ class ForgotPasswordController {
 
       await user.save();
     } catch (error) {
-      console.log(error.message);
       return response.status(error.status).send({
         error: {
           message: "Erro ao recuperar senha. Tente novamente mais tarde.",

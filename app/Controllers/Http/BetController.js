@@ -13,9 +13,9 @@ class BetController {
   }
 
   async store({ auth, request }) {
-    const data = request.input("bets");
+    const betsToStore = request.input("bets");
 
-    const newBets = data.map((bet) => {
+    const newBets = betsToStore.map((bet) => {
       return { ...bet, user_id: Number(auth.user.id) };
     });
 

@@ -10,16 +10,9 @@ class GameController {
   }
 
   async store({ request }) {
-    const data = request.only([
-      "type",
-      "description",
-      "range",
-      "price",
-      "max_number",
-      "color",
-    ]);
+    const games = request.input("types");
 
-    const game = await Game.create(data);
+    const game = await Game.createMany(games);
 
     return game;
   }
@@ -37,7 +30,7 @@ class GameController {
       "description",
       "range",
       "price",
-      "max_number",
+      "max-number",
       "color",
     ]);
 

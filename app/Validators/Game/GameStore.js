@@ -1,5 +1,7 @@
 "use strict";
 
+const Antl = use("Antl");
+
 class GameStore {
   get validateAll() {
     return true;
@@ -7,13 +9,21 @@ class GameStore {
 
   get rules() {
     return {
-      type: "required",
-      description: "required",
-      range: "required",
-      price: "required",
-      max_number: "required",
-      color: "required",
+      types: [
+        {
+          type: "required",
+          description: "required",
+          range: "required",
+          price: "required",
+          "max-number": "required",
+          color: "required",
+        },
+      ],
     };
+  }
+
+  get messages() {
+    return Antl.list("validation");
   }
 }
 
