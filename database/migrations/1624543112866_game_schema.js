@@ -10,7 +10,7 @@ class GameSchema extends Schema {
       table.string("type").notNullable();
       table.text("description").notNullable();
       table.integer("range").notNullable();
-      table.integer("price").notNullable();
+      table.float("price").notNullable();
       table.integer("max-number").notNullable();
       table.string("color").notNullable();
       table.timestamps();

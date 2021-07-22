@@ -42,6 +42,6 @@
   "starts_with": "{{field}} deve começar com as letras: ({{argument}}).",
   "string": "{{field}} deve ser uma STRING.",
   "under": "{{field}} precisa ser abaixo de {{argument.0}}.",
-  "unique": "O campo {{field}} já existe e precisa ser único.",
+  "unique": "O {{field}} inserido já está sendo usado.",
   "url": "URL inválida."
 }
